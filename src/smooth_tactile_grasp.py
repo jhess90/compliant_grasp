@@ -9,6 +9,7 @@ import roslib
 roslib.load_manifest(PACKAGE)
 #roslib.load_manifest(PACKAGE2)
 from std_msgs.msg import String
+from std_msgs.msg import Int32
 from biotac_sensors.msg import BioTacHand
 from compliant_grasp.msg import HandPosVel
 from sensor_msgs.msg import JointState
@@ -20,6 +21,7 @@ class Finger(object):
     pr=9999       # pressure from tactile sensors
     status=2      # status close()=0, stay()=1 or open()=2
     offset=0        # pressure sensor offset
+    stopInput=7
 
 
     def __init__(self,offst):
@@ -28,9 +30,10 @@ class Finger(object):
         self.pr=9999
         self.status=2
         self.offset=offst
+        self.stopInput=7
 
     def CalcStatus(self):
-        if (self.pr>self.offset+7 and self.pr<self.offset+150):
+        if (self.pr>self.offset+self.stopInput and self.pr<self.offset+200):
             self.status = 1
         elif (self.pr>=self.offset+150):
             self.status = 2
@@ -64,6 +67,7 @@ freq = 20
 
 def talker():
     rospy.Subscriber("biotac_pub", BioTacHand , callback_biotac)
+    rospy.Subscriber("pressure_cmd", Int32 , callback_gripPressure)
     #rospy.Subscriber("/bhand/joint_states", JointState , callback_WAM_JointState)
     joint_vel_pub = rospy.Publisher('/bhand/hand_pos_vel_cmd', HandPosVel)
 
@@ -133,6 +137,25 @@ def callback_WAM_JointState(msg):
     F2.pos=msg.position[1]
     F3.pos=msg.position[2]
     SPREAD.pos=msg.position[3]
+
+def callback_gripPressure(msg):
+    global F1
+    global F2
+    global F3
+    global SPREAD
+    
+    if(msg.data==0):
+        F1.status=2
+        F2.status=2
+        F3.status=2
+    elif( 8 < msg.data and msg.data < 30):
+        F1.stopInput=msg.data
+        F2.stopInput=msg.data
+        F3.stopInput=msg.data
+    else:
+        F1.stopInput=7
+        F2.stopInput=7
+        F3.stopInput=7
 
 
 def callback_biotac(msg):
