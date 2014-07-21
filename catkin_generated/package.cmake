@@ -1,0 +1,7 @@
+set(_CATKIN_CURRENT_PACKAGE "compliant_grasp")
+set(compliant_grasp_MAINTAINER "rohit <rohit@todo.todo>")
+set(compliant_grasp_DEPRECATED "")
+set(compliant_grasp_VERSION "0.0.0")
+set(compliant_grasp_BUILD_DEPENDS "roscpp" "rospy" "std_msgs")
+set(compliant_grasp_RUN_DEPENDS "roscpp" "rospy" "std_msgs")
+set(compliant_grasp_BUILDTOOL_DEPENDS "catkin")

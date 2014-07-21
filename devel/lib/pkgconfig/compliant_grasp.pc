@@ -1,0 +1,8 @@
+prefix=/home/rohit/catkin_ws/src/compliant_grasp/devel
+
+Name: compliant_grasp
+Description: Description of compliant_grasp
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/rohit/catkin_ws/src/compliant_grasp/devel/lib 
+Requires: 

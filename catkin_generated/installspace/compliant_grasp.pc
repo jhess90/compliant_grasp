@@ -1,0 +1,8 @@
+prefix=/usr/local
+
+Name: compliant_grasp
+Description: Description of compliant_grasp
+Version: 0.0.0
+Cflags: 
+Libs: -L/usr/local/lib 
+Requires: 

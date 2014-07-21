@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/rohit/catkin_ws/src/compliant_grasp/devel/setup.sh
