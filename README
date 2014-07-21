@@ -1,6 +1,6 @@
 This ROS package is a part of Brain Machine interface project.It can be used to grasp objects with required grip force.
 
-It requires wam_node package from BMI-robot-arm-control.
+It requires wam_node package from BMI-robot-arm-control. Also, it depends on the biotac_sensor ROS package.
 
 Purpose of this package is to take input of grip force from monkey's brain and set robot hand to grip an object with that force and also send the pressure data beck to the brain.
 This package currently uses velocity control to close and open grip, as precise postion control is not required for this project. 
