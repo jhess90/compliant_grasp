@@ -33,9 +33,9 @@ class Finger(object):
         self.stopInput=7
 
     def CalcStatus(self):
-        if (self.pr>self.offset+self.stopInput and self.pr<self.offset+200):
+        if (self.pr>self.offset+self.stopInput and self.pr<self.offset+400):
             self.status = 1
-        elif (self.pr>=self.offset+150):
+        elif (self.pr>=self.offset+400):
             self.status = 2
         else:
             self.status = 0
@@ -143,12 +143,12 @@ def callback_gripPressure(msg):
     global F2
     global F3
     global SPREAD
-    
+    rospy.loginfo(msg.data)
     if(msg.data==0):
         F1.status=2
         F2.status=2
         F3.status=2
-    elif( 8 < msg.data and msg.data < 30):
+    elif( 8 < msg.data and msg.data < 200):
         F1.stopInput=msg.data
         F2.stopInput=msg.data
         F3.stopInput=msg.data
